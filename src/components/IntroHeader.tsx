@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "./Loading";
@@ -11,11 +11,17 @@ export default function IntroHeader() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleLogoClick = () => {
+    if (!mounted) return;
     if (window.location.pathname === "/") {
       window.location.reload();
     } else {
@@ -29,6 +35,7 @@ export default function IntroHeader() {
   };
 
   const handleGoToLogin = () => {
+    if (!mounted) return;
     if (window.location.pathname === "/login") {
       window.location.reload();
     } else {
@@ -49,28 +56,22 @@ export default function IntroHeader() {
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
           <div className="flex items-center gap-6 h-full">
             <button onClick={handleLogoClick} className="focus:outline-none">
-              <Image
-                src="/Originallogo1.png"
-                alt="Logo do Painel"
-                width={200}
-                height={80}
-                priority
-                className="object-contain cursor-pointer"
-              />
+              <div className="relative w-48 h-40">
+                <Image
+                  src="/Originallogo1.png"
+                  alt="Logo do Painel"
+                  fill
+                  sizes="(max-width: 768px) 200px, 400px"
+                  className="object-contain cursor-pointer"
+                  priority
+                />
+              </div>
             </button>
             <nav className="hidden md:flex gap-6 text-white font-medium h-full items-center">
-              <a href="#inicio" className="hover:text-blue-300 transition">
-                Início
-              </a>
-              <a href="#sobre" className="hover:text-blue-300 transition">
-                Sobre
-              </a>
-              <a href="#servicos" className="hover:text-blue-300 transition">
-                Serviços
-              </a>
-              <a href="#contato" className="hover:text-blue-300 transition">
-                Contato
-              </a>
+              <a href="#inicio" className="hover:text-blue-300 transition">Início</a>
+              <a href="#sobre" className="hover:text-blue-300 transition">Sobre</a>
+              <a href="#servicos" className="hover:text-blue-300 transition">Serviços</a>
+              <a href="#contato" className="hover:text-blue-300 transition">Contato</a>
             </nav>
           </div>
 
@@ -94,18 +95,10 @@ export default function IntroHeader() {
 
         {isMenuOpen && (
           <nav className="md:hidden bg-white/10 backdrop-blur-md border-t border-white/10 text-white flex flex-col items-start py-4 gap-2">
-            <a href="#inicio" className="hover:text-blue-300 transition px-2">
-              Início
-            </a>
-            <a href="#sobre" className="hover:text-blue-300 transition px-2">
-              Sobre
-            </a>
-            <a href="#servicos" className="hover:text-blue-300 transition px-2">
-              Serviços
-            </a>
-            <a href="#contato" className="hover:text-blue-300 transition px-2">
-              Contato
-            </a>
+            <a href="#inicio" className="hover:text-blue-300 transition px-2">Início</a>
+            <a href="#sobre" className="hover:text-blue-300 transition px-2">Sobre</a>
+            <a href="#servicos" className="hover:text-blue-300 transition px-2">Serviços</a>
+            <a href="#contato" className="hover:text-blue-300 transition px-2">Contato</a>
 
             <button
               onClick={handleGoToLogin}

@@ -1,5 +1,5 @@
 import "./globals.css";
-import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeProvider } from "../components/ThemeContext";
 
 export const metadata = {
   title: "Dashboard Pro",

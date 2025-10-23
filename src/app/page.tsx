@@ -1,9 +1,5 @@
-import IntroPanel from "../app/components/IntroPanel";
+import IntroPanel from "../components/IntroPanel";
 
-export default function Home() {
-  return (
-    <>
-    <IntroPanel />
-    </>
-  );
-};
+export default function SimulacoesPage() {
+  return <IntroPanel />;
+}
