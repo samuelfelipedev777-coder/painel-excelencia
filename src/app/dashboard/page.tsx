@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import { FiArrowUp, FiSun, FiMoon } from "react-icons/fi";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import Image from "next/image";
-import SmallButton from "../components/SmallButton";
-import MapBrasil from "../components/MapBrasil ";
-import HeaderActions from "../components/HeaderActions";
+import SmallButton from "../../components/SmallButton";
+import MapBrasil from "../../components/MapBrasil ";
+import HeaderActions from "../../components/HeaderActions";
 
 export default function Dashboard() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
