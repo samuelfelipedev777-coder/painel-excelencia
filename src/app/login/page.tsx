@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import IntroHeader from "../components/IntroHeader";
+import IntroHeader from "../../components/IntroHeader";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
