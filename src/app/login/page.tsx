@@ -19,7 +19,6 @@ const itemVariants: Variants = {
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
-
   const [isRegister, setIsRegister] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -28,15 +27,15 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     if (isRegister && senha !== confirmSenha) {
       alert("As senhas não coincidem");
       return;
     }
 
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
       const res = await axios.post(
-        isRegister ? "http://127.0.0.1:8000/register" : "http://127.0.0.1:8000/login",
+        `${API_URL}/${isRegister ? "register" : "login"}`,
         isRegister ? { nome, email, senha } : { email, senha }
       );
 
@@ -47,7 +46,6 @@ const LoginPage: React.FC = () => {
         router.push("/dashboard");
       }
 
-      // Limpar campos
       setNome("");
       setEmail("");
       setSenha("");

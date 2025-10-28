@@ -5,19 +5,15 @@ import bcrypt
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-# Caminho do arquivo de usuários
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 USERS_FILE = os.path.join(BASE_DIR, "users.json")
 
-# Cria o arquivo se não existir
 if not os.path.exists(USERS_FILE):
     with open(USERS_FILE, "w") as f:
         json.dump([], f)
 
-# Inicializa a aplicação FastAPI
 app = FastAPI()
 
-# Permite CORS para o frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,7 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Modelos
 class User(BaseModel):
     nome: str
     email: str
@@ -36,12 +31,10 @@ class LoginData(BaseModel):
     email: str
     senha: str
 
-# Rota raiz
 @app.get("/")
 def root():
     return {"mensagem": "API rodando!"}
 
-# Rota de registro
 @app.post("/register")
 def register_user(user: User):
     with open(USERS_FILE, "r") as file:
@@ -66,7 +59,6 @@ def register_user(user: User):
 
     return {"mensagem": "Usuário registrado com sucesso!"}
 
-# Rota de login
 @app.post("/login")
 def login_user(user: LoginData):
     with open(USERS_FILE, "r") as file:
